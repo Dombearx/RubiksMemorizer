@@ -33,15 +33,11 @@ class Sticker:
 
         v_change = (((hsv_color.z - original_v) / (1 / dt)) * 2) / animation_length
 
-        t = time.time()
-
         while not hsv_color.z <= original_color.z:
             rate(1 / dt)
-
             counter += dt
 
             if counter >= animation_length / 2:
-                # print("time of solid color:", time.time() - t, counter, animation_length / 2)
                 hsv_color -= vector(0, 0, v_change)
 
             self.element.color = color.hsv_to_rgb(hsv_color)
@@ -65,7 +61,7 @@ class Piece:
         return code
 
     def get_random_sticker(self):
-        return random.choice(self.stickers)
+        return random.choice(list(self.stickers.values()))
 
 
 class Cube:
@@ -158,3 +154,20 @@ class Cube:
 
     def animate_sticker(self, sticker_number, fps, animation_length):
         self.stickers[sticker_number].animate(fps, animation_length)
+
+    def get_random_stickers(self):
+        if random.randint(0, 1) == 0:
+            # corner pieces
+            random_piece1, random_piece2 = random.sample(list(self.corner_pieces.values()), 2)
+
+        else:
+            # side pieces
+            random_piece1, random_piece2 = random.sample(list(self.side_pieces.values()), 2)
+
+        print(random_piece1.get_code(), random_piece2.get_code())
+        return random_piece1.get_random_sticker(), random_piece2.get_random_sticker()
+
+    def animate_random_stickers(self, fps, animation_length):
+        random_sticker_1, random_sticker_2 = self.get_random_stickers()
+        random_sticker_1.animate(fps, animation_length)
+        random_sticker_2.animate(fps, animation_length)

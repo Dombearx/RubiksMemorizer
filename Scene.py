@@ -5,8 +5,8 @@ class GameScene:
 
     def __init__(self, title, width, height):
         self.scene = canvas(title=title,
-                       x=0, y=0, width=width, height=height,
-                       center=vector(0, 0, 0), background=color.black)
+                            x=0, y=0, width=width, height=height,
+                            center=vector(0, 0, 0), background=color.black)
 
         self.scene.autoscale = False
 
@@ -18,5 +18,3 @@ class GameScene:
         self.scene.userpan = False
         self.scene.userspin = False
         self.scene.lights = []
-
-

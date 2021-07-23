@@ -26,5 +26,6 @@ if __name__ == '__main__':
             sticker_number = random.randint(0, len(cube.stickers) - 1)
 
             t = time.time()
-            cube.animate_sticker(sticker_number, fps, animation_length)
+            # cube.animate_sticker(sticker_number, fps, animation_length)
+            cube.animate_random_stickers(fps, animation_length)
             print("time", time.time() - t)
