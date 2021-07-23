@@ -1,11 +1,10 @@
 from vpython import *
 
 import random
-import math
 
 scene = canvas(title='RubiksMemorizer',
                x=0, y=0, width=1600, height=800,
-               center=vector(0, 0, 0), background=color.gray(0.9))
+               center=vector(0, 0, 0), background=color.black)
 
 scene.autoscale = False
 
@@ -190,7 +189,7 @@ for index in range(len(stickers)):
         sticker.color = color.gray(0.4)
         sticker.opacity = 0.3
 
-make_walls()
+# make_walls()
 
 # make_lights()
 

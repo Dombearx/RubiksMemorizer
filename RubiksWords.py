@@ -1,6 +1,6 @@
 from vpython import box, scene, vector, color, sphere, rate
 
-from CubeParts import Panel, Side
+from Cube import Panel, Side
 
 pos = (0, 0, 0)
 size = (0.3, 3, 3)
