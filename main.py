@@ -14,10 +14,14 @@ if __name__ == '__main__':
     game_scene = GameScene(title, width, height)
     cube = Cube()
 
+    game_scene.set_cube(cube)
+
     fps = 60
     animation_length = 0.5
     sound = 1
     sound_toggle = True
+
+    game_scene.all_stickers(fps, animation_length)
 
     # Map keyboard to rotate respective faces.
     while True:

@@ -33,17 +33,42 @@ class Sticker:
 
         v_change = (((hsv_color.z - original_v) / (1 / dt)) * 2) / animation_length
 
+        # while not hsv_color.z <= original_color.z:
+        #     rate(1 / dt)
+        #     counter += dt
+        #
+        #     if counter >= animation_length / 2:
+        #         hsv_color -= vector(0, 0, v_change)
+        #
+        #     self.element.color = color.hsv_to_rgb(hsv_color)
+
+        t = time.time()
+        animation_steps = animation_length * fps / 2
+
+        one_step_length = (animation_length / 2) / animation_steps
         while not hsv_color.z <= original_color.z:
+
             rate(1 / dt)
-            counter += dt
+            real_dt = time.time() - t
+
+            counter += real_dt
 
             if counter >= animation_length / 2:
-                hsv_color -= vector(0, 0, v_change)
+                # print("change")
+                v_c = v_change * (real_dt / one_step_length)
+                # print(f"{v_c=}")
+                # print(f"{one_step_length=}")
+                # print(f"{real_dt=}")
+                hsv_color -= vector(0, 0, v_c)
 
             self.element.color = color.hsv_to_rgb(hsv_color)
+            t = time.time()
 
         self.element.color = color.hsv_to_rgb(original_color)
         self.element.opacity = original_opacity
+
+    def get_code(self):
+        return self.side_color_key
 
 
 class Piece:
@@ -58,10 +83,15 @@ class Piece:
         for sticker in self.stickers.values():
             code += sticker.side_color_key
 
+        code = "".join(sorted(code))
+
         return code
 
     def get_random_sticker(self):
         return random.choice(list(self.stickers.values()))
+
+    def get_sticker_by_code(self, code):
+        return self.stickers[code]
 
 
 class Cube:
@@ -114,6 +144,8 @@ class Cube:
 
         return round(dist_sum, 1)
 
+
+
     def __assign_pieces(self):
 
         keys = list(self.stickers.keys())
@@ -155,6 +187,17 @@ class Cube:
     def animate_sticker(self, sticker_number, fps, animation_length):
         self.stickers[sticker_number].animate(fps, animation_length)
 
+    def animate_pair_by_code(self, piece_code1, piece_code2, sticker_code1, sticker_code2, fps, animation_length):
+        if len(piece_code1) == 3:
+            self.corner_pieces[piece_code1].get_sticker_by_code(sticker_code1).animate(fps, animation_length)
+        if len(piece_code1) == 2:
+            self.side_pieces[piece_code1].get_sticker_by_code(sticker_code1).animate(fps, animation_length)
+
+        if len(piece_code2) == 3:
+            self.corner_pieces[piece_code2].get_sticker_by_code(sticker_code2).animate(fps, animation_length)
+        if len(piece_code2) == 2:
+            self.side_pieces[piece_code2].get_sticker_by_code(sticker_code2).animate(fps, animation_length)
+
     def get_random_stickers(self):
         if random.randint(0, 1) == 0:
             # corner pieces
@@ -165,9 +208,12 @@ class Cube:
             random_piece1, random_piece2 = random.sample(list(self.side_pieces.values()), 2)
 
         print(random_piece1.get_code(), random_piece2.get_code())
-        return random_piece1.get_random_sticker(), random_piece2.get_random_sticker()
+        return random_piece1.get_random_sticker(), random_piece2.get_random_sticker(), random_piece1.get_code(), \
+               random_piece2.get_code()
 
     def animate_random_stickers(self, fps, animation_length):
-        random_sticker_1, random_sticker_2 = self.get_random_stickers()
+        random_sticker_1, random_sticker_2, code_1, code_2 = self.get_random_stickers()
         random_sticker_1.animate(fps, animation_length)
         random_sticker_2.animate(fps, animation_length)
+
+        return code_1, random_sticker_1.get_code(), code_2, random_sticker_2.get_code()
