@@ -21,7 +21,8 @@ if __name__ == '__main__':
     sound = 1
     sound_toggle = True
 
-    game_scene.all_stickers(fps, animation_length)
+    game_scene.print_pieces(fps, animation_length)
+    # game_scene.all_stickers(fps, animation_length)
 
     # Map keyboard to rotate respective faces.
     while True:

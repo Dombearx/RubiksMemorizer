@@ -187,6 +187,12 @@ class Cube:
     def animate_sticker(self, sticker_number, fps, animation_length):
         self.stickers[sticker_number].animate(fps, animation_length)
 
+    def animate_sticker_by_code(self, piece_code, sticker_code, fps, animation_length):
+        if len(piece_code) == 3:
+            self.corner_pieces[piece_code].get_sticker_by_code(sticker_code).animate(fps, animation_length)
+        if len(piece_code) == 2:
+            self.side_pieces[piece_code].get_sticker_by_code(sticker_code).animate(fps, animation_length)
+
     def animate_pair_by_code(self, piece_code1, piece_code2, sticker_code1, sticker_code2, fps, animation_length):
         if len(piece_code1) == 3:
             self.corner_pieces[piece_code1].get_sticker_by_code(sticker_code1).animate(fps, animation_length)
