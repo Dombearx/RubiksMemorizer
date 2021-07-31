@@ -1,0 +1,22 @@
+	1	2	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	18	19	20	21	22
+Kategoria:	Fantastyka	Zwierzęta	Narzędzia	Jedzenie	Bronie	Instrumenty	Postacie z OV	Owoce/Warzywa	Kuchnia	Środki transportu	Ubrania	Rzeczy na biurku	Elektronika	Łazienka	Sport	Organy	Rośliny	Praca	Kierunki studiów	Kraje europy	Kategora7	Kategora8
+1	Krasnolud	Orzeł	Młotek	Kotlet	Miecz	Gitara	Mercy	Banan	Talerz	Samochód	Czapka	Długopis	Telefon	Wanna	Koszykówka	Serce	Narcyz	Umowa	Psychologia	Polska	###	###
+2	Elf	Kot	Drabina	Makaron	Buzdygan	Pianino	Widowka	Jabłko	Miska	Chulajnoga	Bluza	Zeszyt	Komputer	Zlew	Siatkówka	Wątroba	Krokus	Nadgodziny	Informatyka	Hiszpania	###	###
+3	Ork	Mrówka	Grabie	Parówki	Katapulta	Skrzypce	Tracer	Gruszka	Kubek	Rower	Spodnie	###	Zegarek	Miska	Piłka nożna	Żołądek	Przebiśnieg	Przerwa	Ekonomia	Włochy	###	###
+4	Driada	Pies	Wiertarka	Pomidorowa	Kopia	Ukulele	Żniwiarz	Arbuz	Widelec	Tramwaj	Spódniczka	###	Laptop	Mydło	Tenis	Jelito	Żonkil	Urlop	Kryminalistyka	Szwajcaria	###	###
+5	Sukkub	Lew	Piła	Jajko	Włócznia	Trąbka	Świniak	Pożeczki	Łyżka	Samolot	Majtki	###	Dysk	Płyn	Piłka ręczna	Nerka	Kaktus	Zwolnienie	Architektura	Norwegia	###	###
+6	Goblin	Żyrafa	Cep	Burger	Topór	Cymbałki	Fara	Czereśnie	Nóż	Helikopter	Stanik	###	Zasilacz	Grzebień	Boks	Płuca	Hiacynt	Etat	Zarządzanie	Finlandia	###	###
+7	Smok	Hipopotam	Łopata	Naleśnik	Sztylet	Bęben	Dva	Śliwki	Piekarnik	Deskorolka	Skarpetki	###	Wentylator	Golarka	Golf	Oskrzela	Tulipan	Wynagrodzenie	Matematyka	Grecja	###	###
+8	Wampir	Słoń	Kosiarka	Pizza	Halabarda	Harfa	Bastion	Orzechy	Lodówka	Rolki	Koszulka	###	Procesor	###	Hokej	Trzustka	Pierwiosnek	Premia	Bezpieczeństwo wewnętrzne	Czechy	###	###
+9	Centaur	Owca	Motyka	Chleb	Pochodnia	Flet	Hanzo	Pomidor	Zmywarka	###	Krawat	###	Płyta	###	Krykiet	Śledziona	Pelargonia	Dniówka	Filozofia	Białoruś	###	###
+10	Ent	Świnia	Sierp	Frytki	Pistolet	Grzechotka	Żołnierz	Ogórek	Przyprawy	###	Rękawiczki	###	Dyskietka	###	Baseball	Wyrostek	Margaretki	Nocka	Grafika	Węgry	###	###
+11	Golem	Bocian	Kilof	Krewetki	Karabin	Organy	###	Cytryna	Mikser	###	Buty	###	Pendrive	###	Badminton	Mózg	Stokrotki	Kadry	Administracja	Austria	###	###
+12	Harpia	Niedźwiedź	Wiadro	Ryż	Balista	###	###	Pomarańcza	Termos	###	Strój kąpielowy	###	###	###	Kolarstwo	Pęcherz	Chaber	Księgowość	Budownictwo	Francja	###	###
+13	Cyklop	Dzik	Śrubokręt	Małże	Łuk	###	###	Kokos	###	###	Szalik	###	###	###	Pływanie	Tchawica	Mak	Zobowązanie	Automatyka i robotyka	Niemcy	###	###
+14	Bazyliszek	Struś	Taczka	###	Kusza	###	###	Kalafior	###	###	###	###	###	###	Strzelectwo	Tętnica	Róże	Zlecenie	Geodezja	Litwa	###	###
+15	Zombie	Koń	Łom	###	###	###	###	Cebula	###	###	###	###	###	###	Łucznictwo	Żyła	Fiołki	Stawka	Mechanika	Ukraina	###	###
+16	Szkielet	Wąż	Obcęgi	###	###	###	###	Szczypiorek	###	###	###	###	###	###	Gimnastyka	Mięśnie	Bratki	Brutto	Mechatronika	Słowacja	###	###
+17	Fenix	Jeleń	Siekiera	###	###	###	###	Marchew	###	###	###	###	###	###	Zapasy	Szkielet	Gerbery	Netto	Elektronika	Macedonia	###	###
+18	Mumia	Jeż	Miara	###	###	###	###	Dynia	###	###	###	###	###	###	Narciarstwo	Tarczyca	Mlecz	Oświadczenia	Kosmonautyka	Holandia	###	###
+19	Minotaur	Panda	Taśma	###	###	###	###	Papryka	###	###	###	###	###	###	Wyścigi konne	Jajniki	Goździki	Kwity	Fizyka	Estonia	###	###
+20	Meduza	Delfin	Poziomica	###	###	###	###	Fasola	###	###	###	###	###	###	Bilard	Jądra	Chryzantemy	Wypowiedzenie	Japonistyka	Chorwacja	###	###
