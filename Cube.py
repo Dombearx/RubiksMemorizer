@@ -6,7 +6,6 @@ from vpython import vector, color, box, dot, cross, acos, rate
 
 
 class Sticker:
-
     def __init__(self, element, side_color_key, position_vector):
         self.element = element
         self.side_color_key = side_color_key
@@ -95,6 +94,8 @@ class Piece:
 
 
 class Cube:
+    PIECES_TO_IGNORE = ["gry", "by"]
+
     def __init__(self):
         # Map keyboard keys to respective faces.
         faces = {'r': (color.red, vector(0, 0, -1)),
@@ -143,8 +144,6 @@ class Cube:
         dist_sum += abs(vector_1.z - vector_2.z)
 
         return round(dist_sum, 1)
-
-
 
     def __assign_pieces(self):
 
@@ -205,21 +204,38 @@ class Cube:
             self.side_pieces[piece_code2].get_sticker_by_code(sticker_code2).animate(fps, animation_length)
 
     def get_random_stickers(self):
+        # TODO Rewrite this mess, it's 12AM don't judge me
         if random.randint(0, 1) == 0:
+            done = False
             # corner pieces
-            random_piece1, random_piece2 = random.sample(list(self.corner_pieces.values()), 2)
+            while not done:
+                random_piece1, random_piece2 = random.sample(list(self.corner_pieces.values()), 2)
+                done = True
+                if any(ext in random_piece1.get_code() for ext in self.PIECES_TO_IGNORE):
+                    done = False
+                if any(ext in random_piece2.get_code() for ext in self.PIECES_TO_IGNORE):
+                    done = False
 
         else:
+            done = False
             # side pieces
-            random_piece1, random_piece2 = random.sample(list(self.side_pieces.values()), 2)
+            while not done:
+                random_piece1, random_piece2 = random.sample(list(self.side_pieces.values()), 2)
+                done = True
+                if any(ext in random_piece1.get_code() for ext in self.PIECES_TO_IGNORE):
+                    done = False
+                if any(ext in random_piece2.get_code() for ext in self.PIECES_TO_IGNORE):
+                    done = False
 
         print(random_piece1.get_code(), random_piece2.get_code())
-        return random_piece1.get_random_sticker(), random_piece2.get_random_sticker(), random_piece1.get_code(), \
-               random_piece2.get_code()
+
+        s1 = random_piece1.get_random_sticker()
+        return s1, random_piece2.get_random_sticker(), random_piece1.get_code(), random_piece2.get_code(), \
+               s1.position_vector
 
     def animate_random_stickers(self, fps, animation_length):
-        random_sticker_1, random_sticker_2, code_1, code_2 = self.get_random_stickers()
+        random_sticker_1, random_sticker_2, code_1, code_2, pos = self.get_random_stickers()
         random_sticker_1.animate(fps, animation_length)
         random_sticker_2.animate(fps, animation_length)
 
-        return code_1, random_sticker_1.get_code(), code_2, random_sticker_2.get_code()
+        return code_1, random_sticker_1.get_code(), code_2, random_sticker_2.get_code(), pos

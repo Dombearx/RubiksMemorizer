@@ -1,6 +1,10 @@
 from itertools import combinations
+import pprint as pp
+import random
 
-from vpython import canvas, vector, color, button, winput
+from vpython import canvas, vector, color, button, winput, sleep, label
+
+from Utils import save_to_file, read_pairs_file
 
 
 class GameScene:
@@ -85,13 +89,56 @@ class GameScene:
         print("checking?", b.text)
         print(self.cwinput.text)
 
+    def read_pairs(self):
+        filename = "words.txt"
+
+        self.words = read_pairs_file(filename)
+
+        self.corners_words = {}
+        self.sides_words = {}
+
+        # Remove count and categories rows
+        del self.words[0]
+        del self.words[0]
+        for line in self.words:
+            del line[0]
+
+        column_number = 0
+        for element_base in self.CORNERS_ORDER:
+            corner_piece_base, sticker_base = element_base.split(":")
+            if corner_piece_base not in self.PIECES_TO_IGNORE:
+                row_number = 0
+                for element_target in self.CORNERS_ORDER:
+                    if not corner_piece_base == element_target.split(":")[0]:
+                        corner_piece_target, sticker_target = element_target.split(":")
+                        if corner_piece_target not in self.PIECES_TO_IGNORE:
+                            self.corners_words[element_base + "-" + element_target] = self.words[row_number][
+                                column_number]
+                            row_number += 1
+                column_number += 1
+
+        pp.pprint(self.corners_words)
+
+        column_number = 0
+        for element_base in self.SIDES_ORDER:
+            side_piece_base, sticker_base = element_base.split(":")
+            if side_piece_base not in self.PIECES_TO_IGNORE:
+                row_number = 0
+                for element_target in self.SIDES_ORDER:
+                    if not side_piece_base == element_target.split(":")[0]:
+                        # print(element_base, element_target)
+                        side_piece_target, sticker_target = element_target.split(":")
+                        if side_piece_target not in self.PIECES_TO_IGNORE:
+                            # print(element_base + "-" + element_target, row_number, column_number)
+                            # self.cube.animate_pair_by_code(side_piece_base, side_piece_target, sticker_base, sticker_target, 60, 0.5)
+                            self.sides_words[element_base + "-" + element_target] = self.words[row_number][
+                                column_number]
+                            row_number += 1
+                column_number += 1
+
+        pp.pprint(self.sides_words)
+
     def print_pieces(self, fps, animation_length):
-        corners_codes = sorted(self.cube.corner_pieces.keys())
-
-        side_codes = sorted(self.cube.side_pieces.keys())
-
-        print(corners_codes)
-        print(side_codes)
 
         c = []
         s = []
@@ -123,16 +170,74 @@ class GameScene:
                                 for s2 in code2:
                                     self.cube.animate_pair_by_code(code1, code2, s1, s2, fps, animation_length)
 
+    def play_round(self):
+        p1, s1, p2, s2, label_pos = self.cube.animate_random_stickers(60, 0.5)
+        self.label_pos = label_pos
+        if len(p1) == 3:
+            self.correct_word = self.corners_words[p1 + ":" + s1 + "-" + p2 + ":" + s2]
+            words_to_draw = self.corners_words
+        if len(p1) == 2:
+            self.correct_word = self.sides_words[p1 + ":" + s1 + "-" + p2 + ":" + s2]
+            words_to_draw = self.sides_words
+        self.cwinput.disabled = False
+        print("full code:", p1 + ":" + s1, p2 + ":" + s2)
+
+        words = []
+        words.append(self.correct_word)
+        words.append(random.choice(list(words_to_draw.values())))
+        words.append(random.choice(list(words_to_draw.values())))
+
+        print(f"{self.correct_word = }")
+
+        random.shuffle(words)
+
+        print(words)
+
+        self.b1.text = words[0]
+        self.b2.text = words[1]
+        self.b3.text = words[2]
+
     def get_user_input(self, v):
         print(v.text)
 
         self.cwinput.text = ""
         self.cwinput.disabled = True
-        p1, s1, p2, s2 = self.cube.animate_random_stickers(60, 0.5)
-        self.cwinput.disabled = False
-        print("full code:", p1 + ":" + s1, p2 + ":" + s2)
+
+        self.play_round()
+
+    def check_answer(self, b):
+        if b.text == "":
+            return
+        print("Your answer: ", b.text)
+        if b.text == self.correct_word:
+            self.correct()
+        else:
+            self.incorrect()
+        self.b1.text = ""
+        self.b2.text = ""
+        self.b3.text = ""
+
+        self.play_round()
+
+    def correct(self):
+        self.scene.background = color.green
+        l = label(pos=self.label_pos, text=self.correct_word)
+        sleep(1)
+        l.visible = False
+        self.scene.background = color.black
+
+    def incorrect(self):
+        self.scene.background = color.red
+        l = label(pos=self.label_pos, text=self.correct_word)
+        sleep(1)
+        l.visible = False
+        self.scene.background = color.black
 
     def __add_widgets(self):
 
         # cbutton = button(text='<b>Red</b>', color=color.red, background=color.cyan, pos=self.scene.title_anchor, bind=self.check_correction)
         self.cwinput = winput(bind=self.get_user_input, width=200)
+        self.b1 = button(bind=self.check_answer, text="")
+        self.b2 = button(bind=self.check_answer, text="")
+        self.b3 = button(bind=self.check_answer, text="")
+        self.start_button = button(bind=self.play_round, text="start game!")
