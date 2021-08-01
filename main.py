@@ -25,6 +25,9 @@ if __name__ == '__main__':
     # game_scene.print_pieces(fps, animation_length)
     # game_scene.all_stickers(fps, animation_length)
 
+    game_scene.read_pairs_from_file("cats.txt")
+    game_scene.save_current_pairs_to_file("cats.txt")
+
     # Map keyboard to rotate respective faces.
     while True:
         ev = game_scene.scene.waitfor('click keydown')

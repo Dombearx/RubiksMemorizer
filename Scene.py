@@ -4,7 +4,7 @@ import random
 
 from vpython import canvas, vector, color, button, winput, sleep, label
 
-from Utils import save_to_file, read_pairs_file
+from Utils import save_to_file, read_pairs_file, read_cats_from_file, save_cats_to_file
 
 
 class GameScene:
@@ -89,6 +89,41 @@ class GameScene:
         print("checking?", b.text)
         print(self.cwinput.text)
 
+    def read_pairs_from_file(self, filename):
+        pairs, cats = read_cats_from_file(filename)
+
+        self.pairs_cats = [
+            {},
+            {},
+            {},
+            {},
+            {}
+        ]
+
+        for p, c in zip(pairs, cats):
+            self.pairs_cats[c][p] = c
+
+    def save_current_pairs_to_file(self, filename):
+
+        data = []
+
+        for dictionary in self.pairs_cats:
+            for pair, cat in dictionary.items():
+                data.append((pair, cat))
+
+        save_cats_to_file(filename, data)
+
+    def save_pairs_to_file_one(self):
+
+        data = []
+
+        for pair in self.corners_words.keys():
+            data.append((pair, 0))
+        for pair in self.sides_words.keys():
+            data.append((pair, 0))
+
+        save_cats_to_file("cats.txt", data)
+
     def read_pairs(self):
         filename = "words.txt"
 
@@ -117,8 +152,6 @@ class GameScene:
                             row_number += 1
                 column_number += 1
 
-        pp.pprint(self.corners_words)
-
         column_number = 0
         for element_base in self.SIDES_ORDER:
             side_piece_base, sticker_base = element_base.split(":")
@@ -135,8 +168,6 @@ class GameScene:
                                 column_number]
                             row_number += 1
                 column_number += 1
-
-        pp.pprint(self.sides_words)
 
     def print_pieces(self, fps, animation_length):
 
